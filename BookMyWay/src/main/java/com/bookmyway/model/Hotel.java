@@ -32,6 +32,9 @@ public class Hotel {
 	@NotBlank(message = "Image URL cannot be blank")
 	private String image;
 
+	@NotBlank(message = "location cannot be blank")
+	private String location;
+	
 	@NotBlank(message = "Category cannot be blank")
 	private String category;
 
@@ -39,17 +42,17 @@ public class Hotel {
 	private String description;
 
 	@DecimalMin(value = "0.0", message = "Price must be a non-negative value")
-	private double price;
+	private Double price;
 
 	@Min(value = 0, message = "Available rooms must be a non-negative integer")
-	private int availableRooms;
+	private Integer availableRooms;
 
 	@Min(value = 0, message = "Total rooms must be a non-negative integer")
-	private int totalRooms;
+	private Integer totalRooms;
 
 	@DecimalMin(value = "0.0", message = "Rating must be a non-negative value")
 	@DecimalMax(value = "5.0", message = "Rating cannot exceed 5.0")
-	private double rating;
+	private Double rating;
 
 
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
