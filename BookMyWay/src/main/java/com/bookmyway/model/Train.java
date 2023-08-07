@@ -14,7 +14,9 @@ import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
+@Data
 @Entity
 public class Train {
 	@Id
@@ -40,13 +42,13 @@ public class Train {
 	private LocalDateTime arrivalDateTime;
 
 	@DecimalMin(value = "0.0", message = "Ticket price must be a non-negative value")
-	private double ticketPrice;
+	private Double ticketPrice;
 
 	@Min(value = 0, message = "Available seats must be a non-negative integer")
-	private int availableSeats;
+	private Integer availableSeats;
 
 	@Min(value = 1, message = "Train capacity must be at least 1")
-	private int trainCapacity;
+	private Integer trainCapacity;
 
 	@NotBlank(message = "Image URL cannot be blank")
 	private String image;
