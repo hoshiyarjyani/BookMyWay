@@ -56,4 +56,5 @@ public interface BusRepository extends JpaRepository<Bus, Integer> {
     @Query("SELECT b FROM Bus b WHERE b.departureCity = :departureCity AND b.destinationCity = :destinationCity")
     List<Bus> findBusByRoute(@Param("departureCity") String departureCity,@Param("destinationCity") String destinationCity);
     
+
 }

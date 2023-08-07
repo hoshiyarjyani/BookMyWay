@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.bookmyway.model.Flight;
+
 import com.bookmyway.model.Train;
 
 /**
@@ -54,7 +55,6 @@ public interface TrainRepository extends JpaRepository<Train, Integer> {
      */
     @Query("SELECT t FROM Train t WHERE t.trainId = :trainId AND t.availableSeats >= :requiredSeats")
     boolean checkTrainSeatAvailability(@Param("trainId") Integer trainId, @Param("requiredSeats") Integer requiredSeats);
-
     
     @Query("SELECT t FROM Train t WHERE t.departureStation = :departureStation AND f.destinationStation = :destinationStation")
     List<Train> findTrainByRoute(@Param("departureStation") String departureStation,@Param("destinationStation") String destinationStation);

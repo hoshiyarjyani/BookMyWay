@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bookmyway.model.Flight;
 import com.bookmyway.service.FlightService;
 
+
 /**
  * FlightController handles HTTP requests related to Flight entities. It
  * provides CRUD operations for flights and additional methods for searching and

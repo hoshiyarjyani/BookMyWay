@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.bookmyway.model.Flight;
+
 import com.bookmyway.model.Hotel;
 
 /**
@@ -59,4 +60,5 @@ public interface HotelRepository extends JpaRepository<Hotel, Integer> {
     List<Hotel> findHotelByLocation(@Param("location") String location);
     
     
+
 }

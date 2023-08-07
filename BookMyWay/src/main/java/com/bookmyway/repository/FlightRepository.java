@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.bookmyway.model.Bus;
+
 import com.bookmyway.model.Flight;
 
 
@@ -26,10 +27,13 @@ public interface FlightRepository extends JpaRepository<Flight, Integer> {
      * @param airlineName The airline name to search for.
      * @return The Flight entity with the specified airline name, or null if not found.
      */
+  
     List<Flight> findByAirlineName(String airlineName);
 
     Flight findByName(String flightName);
     
+    Flight findByAirlineName(String airlineName);
+
     /**
      * Retrieves a list of Flight entities based on the departure airport and destination airport.
      *
@@ -62,4 +66,5 @@ public interface FlightRepository extends JpaRepository<Flight, Integer> {
     @Query("SELECT f FROM Flight f WHERE f.departureAirport = :departureAirport AND f.destinationAirport = :destinationAirport")
     List<Flight> findFlightByRoute(@Param("departureAirport") String departureAirport,@Param("destinationAirport") String destinationAirport);
     
+
 }
