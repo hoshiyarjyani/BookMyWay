@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookmyway.model.Hotel;
+import com.bookmyway.service.HotelService;
+
 
 /**
  * HotelController handles HTTP requests related to Hotel entities. It provides
