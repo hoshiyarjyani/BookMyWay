@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookmyway.model.Train;
-import com.bookmyway.service.TrainService;
-
 
 /**
  * TrainController handles HTTP requests related to Train entities. It provides
