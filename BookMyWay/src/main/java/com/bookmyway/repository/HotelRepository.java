@@ -7,8 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.bookmyway.model.Flight;
-
 import com.bookmyway.model.Hotel;
 
 /**
@@ -54,11 +52,5 @@ public interface HotelRepository extends JpaRepository<Hotel, Integer> {
      */
     @Query("SELECT h FROM Hotel h WHERE h.hotelId = :hotelId AND h.availableRooms >= :requiredRooms")
     boolean checkHotelAvailability(@Param("hotelId") Integer hotelId, @Param("requiredRooms") Integer requiredRooms);
-
-    
-    @Query("SELECT h FROM Hotel h WHERE h.location = :location")
-    List<Hotel> findHotelByLocation(@Param("location") String location);
-    
-    
 
 }

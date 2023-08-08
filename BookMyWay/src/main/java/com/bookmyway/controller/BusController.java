@@ -17,9 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bookmyway.model.Bus;
 
-import com.bookmyway.service.BusService;
-
-
 /**
  * BusController handles HTTP requests related to Bus entities. It provides CRUD
  * operations for buses and additional methods for searching and checking
@@ -33,11 +30,7 @@ import com.bookmyway.service.BusService;
 public class BusController {
 
 	@Autowired
-
-	private BusService busService;
-
 	private final BusService busService;
-
 
 	/**
 	 * Adds a new bus to the database.
