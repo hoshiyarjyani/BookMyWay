@@ -93,7 +93,7 @@ public class HotelServiceImpl implements HotelService {
 	@Override
 	public List<Hotel> searchHotelsByLocation(String location) throws HotelException {
 
-		List<Hotel> hotellist = hotelRepository.findHotelByLocation(location);
+		List<Hotel> hotellist = hotelRepository.findByLocation(location);
 
 		if (hotellist.isEmpty()) {
 			throw new HotelException("No Hotel found for location " + location);

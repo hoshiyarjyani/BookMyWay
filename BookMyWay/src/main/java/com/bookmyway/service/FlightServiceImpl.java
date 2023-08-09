@@ -44,7 +44,7 @@ public class FlightServiceImpl implements FlightService {
 	@Override
 	public Flight getFlightByName(String flightName) throws FlightException {
 
-		Flight flight = flightRepository.findByName(flightName);
+		Flight flight = (Flight) flightRepository.findByAirlineName(flightName);
 
 		if (flight == null) {
 			throw new FlightException("Flight with name " + flightName + " doesn't exists");

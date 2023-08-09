@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bookmyway.exception.HotelException;
 import com.bookmyway.model.Hotel;
+import com.bookmyway.service.HotelService;
 
 /**
  * HotelController handles HTTP requests related to Hotel entities. It provides
@@ -36,9 +38,10 @@ public class HotelController {
 	 *
 	 * @param hotel The hotel object to be added.
 	 * @return The added hotel with HttpStatus.CREATED status if successful.
+	 * @throws HotelException
 	 */
 	@PostMapping
-	public ResponseEntity<Hotel> addHotelHandler(@RequestBody Hotel hotel) {
+	public ResponseEntity<Hotel> addHotelHandler(@RequestBody Hotel hotel) throws HotelException {
 		Hotel addedHotel = hotelService.addHotel(hotel);
 		return new ResponseEntity<>(addedHotel, HttpStatus.CREATED);
 	}
@@ -47,9 +50,10 @@ public class HotelController {
 	 * Retrieves a list of all hotels from the database.
 	 *
 	 * @return A list of all hotels with HttpStatus.OK status if successful.
+	 * @throws HotelException
 	 */
 	@GetMapping
-	public ResponseEntity<List<Hotel>> getAllHotelsHandler() {
+	public ResponseEntity<List<Hotel>> getAllHotelsHandler() throws HotelException {
 		List<Hotel> hotels = hotelService.getAllHotels();
 		return new ResponseEntity<>(hotels, HttpStatus.OK);
 	}
@@ -60,9 +64,10 @@ public class HotelController {
 	 * @param hotelName The name of the hotel to be retrieved.
 	 * @return The hotel with HttpStatus.OK status if found, or HttpStatus.NOT_FOUND
 	 *         if not found.
+	 * @throws HotelException
 	 */
 	@GetMapping("/{hotelName}")
-	public ResponseEntity<Hotel> getHotelByNameHandler(@PathVariable String hotelName) {
+	public ResponseEntity<Hotel> getHotelByNameHandler(@PathVariable String hotelName) throws HotelException {
 		Hotel hotel = hotelService.getHotelByName(hotelName);
 		if (hotel != null) {
 			return new ResponseEntity<>(hotel, HttpStatus.OK);
@@ -78,9 +83,10 @@ public class HotelController {
 	 * @param hotel   The updated hotel object.
 	 * @return The updated hotel with HttpStatus.OK status if successful, or
 	 *         HttpStatus.NOT_FOUND if the hotel does not exist.
+	 * @throws HotelException
 	 */
 	@PutMapping("/{hotelId}")
-	public ResponseEntity<Hotel> updateHotelHandler(@PathVariable Integer hotelId, @RequestBody Hotel hotel) {
+	public ResponseEntity<Hotel> updateHotelHandler(@PathVariable Integer hotelId, @RequestBody Hotel hotel) throws HotelException {
 		Hotel updatedHotel = hotelService.updateHotel(hotelId, hotel);
 		if (updatedHotel != null) {
 			return new ResponseEntity<>(updatedHotel, HttpStatus.OK);
@@ -95,9 +101,10 @@ public class HotelController {
 	 * @param hotelId The ID of the hotel to be deleted.
 	 * @return The deleted hotel with HttpStatus.OK status if successful, or
 	 *         HttpStatus.NOT_FOUND if the hotel does not exist.
+	 * @throws HotelException
 	 */
 	@DeleteMapping("/{hotelId}")
-	public ResponseEntity<Hotel> deleteHotelHandler(@PathVariable Integer hotelId) {
+	public ResponseEntity<Hotel> deleteHotelHandler(@PathVariable Integer hotelId) throws HotelException {
 		Hotel deletedHotel = hotelService.deleteHotelById(hotelId);
 		if (deletedHotel != null) {
 			return new ResponseEntity<>(deletedHotel, HttpStatus.OK);
@@ -112,9 +119,10 @@ public class HotelController {
 	 * @param location The location to search for hotels.
 	 * @return A list of hotels with HttpStatus.OK status if found, or
 	 *         HttpStatus.NOT_FOUND if no matching hotels are found.
+	 * @throws HotelException
 	 */
 	@GetMapping("/search/location")
-	public ResponseEntity<List<Hotel>> searchHotelsByLocationHandler(@RequestParam String location) {
+	public ResponseEntity<List<Hotel>> searchHotelsByLocationHandler(@RequestParam String location) throws HotelException {
 		List<Hotel> hotels = hotelService.searchHotelsByLocation(location);
 		return new ResponseEntity<>(hotels, HttpStatus.OK);
 	}
@@ -126,10 +134,11 @@ public class HotelController {
 	 * @param maxPrice The maximum ticket price.
 	 * @return A list of hotels with HttpStatus.OK status if found, or
 	 *         HttpStatus.NOT_FOUND if no matching hotels are found.
+	 * @throws HotelException
 	 */
 	@GetMapping("/search/price")
 	public ResponseEntity<List<Hotel>> searchHotelsByPriceRangeHandler(@RequestParam Double minPrice,
-			@RequestParam Double maxPrice) {
+			@RequestParam Double maxPrice) throws HotelException {
 		List<Hotel> hotels = hotelService.searchHotelsByPriceRange(minPrice, maxPrice);
 		return new ResponseEntity<>(hotels, HttpStatus.OK);
 	}
@@ -143,10 +152,11 @@ public class HotelController {
 	 * @return true with HttpStatus.OK status if rooms are available, false with
 	 *         HttpStatus.OK status if rooms are not available, or
 	 *         HttpStatus.NOT_FOUND if the hotel does not exist.
+	 * @throws HotelException
 	 */
 	@GetMapping("/check-availability/{hotelId}")
 	public ResponseEntity<Boolean> checkHotelAvailabilityHandler(@PathVariable Integer hotelId,
-			@RequestParam Integer requiredRooms) {
+			@RequestParam Integer requiredRooms) throws HotelException {
 		boolean isAvailable = hotelService.checkHotelAvailability(hotelId, requiredRooms);
 		return new ResponseEntity<>(isAvailable, HttpStatus.OK);
 	}

@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bookmyway.exception.BusException;
 import com.bookmyway.model.Bus;
+import com.bookmyway.service.BusService;
 
 /**
  * BusController handles HTTP requests related to Bus entities. It provides CRUD
@@ -30,16 +32,17 @@ import com.bookmyway.model.Bus;
 public class BusController {
 
 	@Autowired
-	private final BusService busService;
-
+	private BusService busService;
+	 
 	/**
 	 * Adds a new bus to the database.
 	 *
 	 * @param bus The bus object to be added.
 	 * @return The added bus with HttpStatus.CREATED status if successful.
+	 * @throws BusException
 	 */
 	@PostMapping
-	public ResponseEntity<Bus> addBusHandler(@RequestBody Bus bus) {
+	public ResponseEntity<Bus> addBusHandler(@RequestBody Bus bus) throws BusException {
 		Bus addedBus = busService.addBus(bus);
 		return new ResponseEntity<>(addedBus, HttpStatus.CREATED);
 	}
@@ -48,9 +51,10 @@ public class BusController {
 	 * Retrieves a list of all buses from the database.
 	 *
 	 * @return A list of all buses with HttpStatus.OK status if successful.
+	 * @throws BusException
 	 */
 	@GetMapping
-	public ResponseEntity<List<Bus>> getAllBusesHandler() {
+	public ResponseEntity<List<Bus>> getAllBusesHandler() throws BusException {
 		List<Bus> buses = busService.getAllBuses();
 		return new ResponseEntity<>(buses, HttpStatus.OK);
 	}
@@ -61,9 +65,10 @@ public class BusController {
 	 * @param busId The ID of the bus to be retrieved.
 	 * @return The bus with HttpStatus.OK status if found, or HttpStatus.NOT_FOUND
 	 *         if not found.
+	 * @throws BusException
 	 */
 	@GetMapping("/{busId}")
-	public ResponseEntity<Bus> getBusByIdHandler(@PathVariable Integer busId) {
+	public ResponseEntity<Bus> getBusByIdHandler(@PathVariable Integer busId) throws BusException {
 		Bus bus = busService.getBusById(busId);
 		if (bus != null) {
 			return new ResponseEntity<>(bus, HttpStatus.OK);
@@ -79,9 +84,10 @@ public class BusController {
 	 * @param bus   The updated bus object.
 	 * @return The updated bus with HttpStatus.OK status if successful, or
 	 *         HttpStatus.NOT_FOUND if the bus does not exist.
+	 * @throws BusException
 	 */
 	@PutMapping("/{busId}")
-	public ResponseEntity<Bus> updateBusHandler(@PathVariable Integer busId, @RequestBody Bus bus) {
+	public ResponseEntity<Bus> updateBusHandler(@PathVariable Integer busId, @RequestBody Bus bus) throws BusException {
 		Bus updatedBus = busService.updateBus(busId, bus);
 		if (updatedBus != null) {
 			return new ResponseEntity<>(updatedBus, HttpStatus.OK);
@@ -96,9 +102,10 @@ public class BusController {
 	 * @param busId The ID of the bus to be deleted.
 	 * @return The deleted bus with HttpStatus.OK status if successful, or
 	 *         HttpStatus.NOT_FOUND if the bus does not exist.
+	 * @throws BusException
 	 */
 	@DeleteMapping("/{busId}")
-	public ResponseEntity<Bus> deleteBusHandler(@PathVariable Integer busId) {
+	public ResponseEntity<Bus> deleteBusHandler(@PathVariable Integer busId) throws BusException {
 		Bus deletedBus = busService.deleteBus(busId);
 		if (deletedBus != null) {
 			return new ResponseEntity<>(deletedBus, HttpStatus.OK);
@@ -114,10 +121,11 @@ public class BusController {
 	 * @param destinationCity The destination city.
 	 * @return A list of buses with HttpStatus.OK status if found, or
 	 *         HttpStatus.NOT_FOUND if no matching buses are found.
+	 * @throws BusException
 	 */
 	@GetMapping("/search/route")
 	public ResponseEntity<List<Bus>> searchBusesByRouteHandler(@RequestParam String departureCity,
-			@RequestParam String destinationCity) {
+			@RequestParam String destinationCity) throws BusException {
 		List<Bus> buses = busService.searchBusesByRoute(departureCity, destinationCity);
 		return new ResponseEntity<>(buses, HttpStatus.OK);
 	}
@@ -129,10 +137,11 @@ public class BusController {
 	 * @param maxPrice The maximum ticket price.
 	 * @return A list of buses with HttpStatus.OK status if found, or
 	 *         HttpStatus.NOT_FOUND if no matching buses are found.
+	 * @throws BusException
 	 */
 	@GetMapping("/search/price")
 	public ResponseEntity<List<Bus>> searchBusesByPriceRangeHandler(@RequestParam Double minPrice,
-			@RequestParam Double maxPrice) {
+			@RequestParam Double maxPrice) throws BusException {
 		List<Bus> buses = busService.searchBusesByPriceRange(minPrice, maxPrice);
 		return new ResponseEntity<>(buses, HttpStatus.OK);
 	}
@@ -146,10 +155,11 @@ public class BusController {
 	 * @return true with HttpStatus.OK status if seats are available, false with
 	 *         HttpStatus.OK status if seats are not available, or
 	 *         HttpStatus.NOT_FOUND if the bus does not exist.
+	 * @throws BusException
 	 */
 	@GetMapping("/check-availability/{busId}")
 	public ResponseEntity<Boolean> checkBusAvailabilityHandler(@PathVariable Integer busId,
-			@RequestParam Integer requiredSeats) {
+			@RequestParam Integer requiredSeats) throws BusException {
 		boolean isAvailable = busService.checkBusAvailability(busId, requiredSeats);
 		return new ResponseEntity<>(isAvailable, HttpStatus.OK);
 	}
