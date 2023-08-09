@@ -44,7 +44,7 @@ public class GlobalExceptionHandler {
 
 
 	@ExceptionHandler(NotFoundException.class)
-	public ResponseEntity<MyErrorDetails> exceptionHandler2(NotFoundException ce, WebRequest req) {
+	public ResponseEntity<MyErrorDetails> exceptionHandler3(NotFoundException ce, WebRequest req) {
 		MyErrorDetails err = new MyErrorDetails();
 		err.setTimpstamp(LocalDateTime.now());
 		err.setMessage(ce.getMessage());
@@ -54,7 +54,7 @@ public class GlobalExceptionHandler {
 	}
 
 	@ExceptionHandler(BusException.class)
-	public ResponseEntity<MyErrorDetails> exceptionHandler2(BusException ce, WebRequest req) {
+	public ResponseEntity<MyErrorDetails> exceptionHandler4(BusException ce, WebRequest req) {
 		MyErrorDetails err = new MyErrorDetails();
 		err.setTimpstamp(LocalDateTime.now());
 		err.setMessage(ce.getMessage());
@@ -63,7 +63,7 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
 	}
 	@ExceptionHandler(TrainException.class)
-	public ResponseEntity<MyErrorDetails> exceptionHandler2(TrainException ce, WebRequest req) {
+	public ResponseEntity<MyErrorDetails> exceptionHandler5(TrainException ce, WebRequest req) {
 		MyErrorDetails err = new MyErrorDetails();
 		err.setTimpstamp(LocalDateTime.now());
 		err.setMessage(ce.getMessage());
@@ -72,7 +72,7 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
 	}
 	@ExceptionHandler(HotelException.class)
-	public ResponseEntity<MyErrorDetails> exceptionHandler2(HotelException ce, WebRequest req) {
+	public ResponseEntity<MyErrorDetails> exceptionHandler6(HotelException ce, WebRequest req) {
 		MyErrorDetails err = new MyErrorDetails();
 		err.setTimpstamp(LocalDateTime.now());
 		err.setMessage(ce.getMessage());
@@ -81,7 +81,7 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
 	}
 	@ExceptionHandler(FlightException.class)
-	public ResponseEntity<MyErrorDetails> exceptionHandler2(FlightException ce, WebRequest req) {
+	public ResponseEntity<MyErrorDetails> exceptionHandler7(FlightException ce, WebRequest req) {
 		MyErrorDetails err = new MyErrorDetails();
 		err.setTimpstamp(LocalDateTime.now());
 		err.setMessage(ce.getMessage());
