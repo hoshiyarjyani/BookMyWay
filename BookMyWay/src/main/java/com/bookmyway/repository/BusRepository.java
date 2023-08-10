@@ -53,4 +53,6 @@ public interface BusRepository extends JpaRepository<Bus, Integer> {
     @Query("SELECT b FROM Bus b WHERE b.busId = :busId AND b.availableSeats >= :requiredSeats")
     boolean checkBusSeatAvailability(@Param("busId") Integer busId, @Param("requiredSeats") Integer requiredSeats);
 
+	List<Bus> findBusByRoute(String departureCity, String destinationCity);
+
 }

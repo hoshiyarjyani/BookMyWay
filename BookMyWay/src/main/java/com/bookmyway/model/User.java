@@ -1,6 +1,8 @@
 package com.bookmyway.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -8,6 +10,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -55,4 +58,7 @@ public class User {
 
 	private LocalDateTime registrationDate;
 	private Boolean isActive;
+	
+	@OneToMany(mappedBy = "user")
+    private List<Customer> customers = new ArrayList<>();
 }

@@ -29,6 +29,10 @@ public class Customer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer customerId;
+	
+	@ManyToOne
+	private User user;
+	
 
 	@NotBlank(message = "First name cannot be blank")
 	private String firstName;
@@ -73,4 +77,7 @@ public class Customer {
 
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Coupon> couponList = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Booking> bookings = new ArrayList<>();
 }

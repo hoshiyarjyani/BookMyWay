@@ -54,4 +54,6 @@ public interface TrainRepository extends JpaRepository<Train, Integer> {
     @Query("SELECT t FROM Train t WHERE t.trainId = :trainId AND t.availableSeats >= :requiredSeats")
     boolean checkTrainSeatAvailability(@Param("trainId") Integer trainId, @Param("requiredSeats") Integer requiredSeats);
 
+	List<Train> findTrainByRoute(String departureStation, String destinationStation);
+
 }

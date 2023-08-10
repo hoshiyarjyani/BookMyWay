@@ -25,7 +25,7 @@ public interface FlightRepository extends JpaRepository<Flight, Integer> {
      * @param airlineName The airline name to search for.
      * @return The Flight entity with the specified airline name, or null if not found.
      */
-    Flight findByAirlineName(String airlineName);
+    List<Flight> findByAirlineName(String airlineName);
 
     /**
      * Retrieves a list of Flight entities based on the departure airport and destination airport.
@@ -54,5 +54,7 @@ public interface FlightRepository extends JpaRepository<Flight, Integer> {
      */
     @Query("SELECT f FROM Flight f WHERE f.flightId = :flightId AND f.availableSeats >= :requiredSeats")
     boolean checkFlightAvailability(@Param("flightId") Integer flightId, @Param("requiredSeats") Integer requiredSeats);
+
+	List<Flight> findFlightByRoute(String departureAirport, String destinationAirport);
 
 }

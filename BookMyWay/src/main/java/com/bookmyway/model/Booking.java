@@ -1,8 +1,10 @@
 package com.bookmyway.model;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -27,11 +29,11 @@ public class Booking {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer bookingId;
 
-	@ManyToOne
-	@JoinColumn(name = "userId")
-	private User user;
+//	@ManyToOne
+//	@JoinColumn(name = "userId")
+//	private User user;
 
-	@OneToMany(mappedBy = "booking")
+	@OneToMany(mappedBy = "booking", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<BookingItem> bookingItems;
 
 	@NotNull(message = "Booking date/time cannot be null")
@@ -43,9 +45,9 @@ public class Booking {
 	@Enumerated(EnumType.STRING)
 	private Status status;
 
-	// @ManyToOne
-	// @JoinColumn(name = "customerId")
-	// private Customer customer;
+	 @ManyToOne
+	 @JoinColumn(name = "customerId")
+	 private Customer customer;
 
 	@ManyToOne
 	@JoinColumn(name = "hotelId")
@@ -62,5 +64,9 @@ public class Booking {
 	@ManyToOne
 	@JoinColumn(name = "busId")
 	private Bus bus;
+	
+	@OneToMany(mappedBy = "booking",cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Member> members = new ArrayList<>();
+	
 
 }
