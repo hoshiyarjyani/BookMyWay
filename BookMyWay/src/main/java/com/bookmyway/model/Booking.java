@@ -42,10 +42,10 @@ public class Booking {
 
 	@Enumerated(EnumType.STRING)
 	private Status status;
-	
-	@ManyToOne
-	@JoinColumn(name = "customerId")
-	private Customer customer;
+
+	// @ManyToOne
+	// @JoinColumn(name = "customerId")
+	// private Customer customer;
 
 	@ManyToOne
 	@JoinColumn(name = "hotelId")
@@ -62,5 +62,5 @@ public class Booking {
 	@ManyToOne
 	@JoinColumn(name = "busId")
 	private Bus bus;
-	
+
 }
